@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>DJ Mistiek App</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="DJ Mistiek">
+    
+    <link rel="apple-touch-icon" href="https://via.placeholder.com/180x180/ff5500/ffffff?text=M">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Zorgt dat content niet achter de inkeping (notch) van de iPhone 15 valt */
+            padding: env(safe-area-inset-top) 20px calc(env(safe-area-inset-bottom) + 40px) 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #111, #333);
+            margin: 40px auto 10px;
+            border: 2px solid #ff5500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255, 85, 0, 0.3);
+        }
+
+        h1 { font-size: 1.8rem; margin: 10px 0; letter-spacing: 2px; }
+        p.subtitle { color: #888; margin-bottom: 35px; font-size: 0.9rem; }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+            border: 1px solid #222;
+            width: 100%; /* Zorgt dat de button breed is */
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn:active { transform: scale(0.96); background-color: #222; }
+
+        /* Accent Kleuren */
+        .btn-release { background: #fff; color: #000; border: none; }
+        .btn-spotify { border-left: 6px solid #1DB954; }
+        .btn-soundcloud { border-left: 6px solid #ff5500; }
+        
+        #share-btn {
+            background-color: #007AFF;
+            border: none;
+            margin-top: 20px;
+        }
+
+        footer { margin-top: 40px; color: #444; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="profile-img">M</div>
+        <h1>DJ MISTIEK</h1>
+        <p class="subtitle">Official Artist App</p>
+
+        <a href="https://ditto.fm/obsidian-drop" target="_blank" class="btn btn-release">🔥 OBSIDIAN DROP</a>
+        <a href="https://open.spotify.com" target="_blank" class="btn btn-spotify">🎧 Luister op Spotify</a>
+        <a href="https://on.soundcloud.com/VBvfHasiFxXZAtAmUf" target="_blank" class="btn btn-soundcloud">☁️ SoundCloud</a>
+        <a href="mailto:djmistiek@gmail.com" class="btn">📧 Samenwerken</a>
+
+        <button id="share-btn" class="btn">🔗 Deel deze App</button>
+
+        <footer>Versie 1.1 - Built for DJ Mistiek</footer>
+    </div>
+
+    <script>
+        const shareBtn = document.getElementById('share-btn');
+
+        shareBtn.addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'DJ Mistiek App',
+                        text: 'Check de nieuwste tracks van DJ Mistiek!',
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('Delen geannuleerd');
+                }
+            } else {
+                alert("Kopieer de link in de adresbalk om te delen!");
+            }
+        });
+    </script>
+
+</body>
+</html>
